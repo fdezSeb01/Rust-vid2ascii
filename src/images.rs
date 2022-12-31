@@ -44,7 +44,7 @@ pub fn get_index(value: u8) -> usize {
     //necesito regresar un valor entre 0-15
     //dados valores entre 0-255
     let index: usize;
-    index = ((value as f32/255 as f32) as f32 * 17.00) as usize;
+    index = ((value as f32/255 as f32) as f32 * 19.00) as usize;
 
     index
 }

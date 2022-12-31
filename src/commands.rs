@@ -17,7 +17,7 @@ use terminal_size::{Width, Height, terminal_size};
 pub fn prepare_vid(path: &String){
     //creates a folder to store the frames and converts the video into a 100 pix height and 6ps to img sequence"scale=-1:100,fps=6"
     let h = new_height(vid_dimensions(path));
-    let vf_arg = "scale=-1:".to_string() + &h.to_string() + ",fps=6";
+    let vf_arg = "scale=-1:".to_string() + &h.to_string() + ",fps=20";
 
     let _output = Command::new("rm")
         .arg("-f")

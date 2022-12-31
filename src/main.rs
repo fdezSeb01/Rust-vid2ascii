@@ -16,7 +16,7 @@ fn main() -> Result<(), images::ImageDataError>{
     .expect("Error setting Ctrl-C handler");
 
 
-    const DENSITY: [char; 18] = [' ','.','´','·','-','º','"','=','+','f','n','o','m','M','#','W','Ñ','@'];
+    const DENSITY: [char; 20] = [' ','.',',','´','º','·','-','º','"','=','+','f','n','o','m','M','#','W','Ñ','@'];
     let args = args::Args::new();
     commands::prepare_vid(&args.path); //en este punto ya esta la carpeta con todas las fotos
 
@@ -28,9 +28,10 @@ fn main() -> Result<(), images::ImageDataError>{
         let (w,h,pic) = images::find_image_from_path(path)?;
         images::to_ascii(pic, &DENSITY, w as u16 , h as u16)?;
         stdout().flush().unwrap();
-        thread::sleep(time::Duration::from_millis(166));
+        thread::sleep(time::Duration::from_millis(50));
         print!("{}{}", clear::All, cursor::Goto(1, 1));
     }
+
     commands::end_program();
 
     Ok(())
