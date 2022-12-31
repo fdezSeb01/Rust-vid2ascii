@@ -28,7 +28,7 @@ fn main() -> Result<(), images::ImageDataError>{
         let (w,h,pic) = images::find_image_from_path(path)?;
         images::to_ascii(pic, &DENSITY, w as u16 , h as u16)?;
         stdout().flush().unwrap();
-        thread::sleep(time::Duration::from_millis(100));
+        thread::sleep(time::Duration::from_millis(166));
         print!("{}{}", clear::All, cursor::Goto(1, 1));
     }
     commands::end_program();
