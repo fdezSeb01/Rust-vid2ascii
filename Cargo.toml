@@ -8,5 +8,5 @@ edition = "2021"
 [dependencies]
 image = "0.24.5"
 terminal_size = "0.2.3"
-termion = "2.0.1"
+# termion = "2.0.1"
 ctrlc = "3.2.4"
