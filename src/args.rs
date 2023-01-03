@@ -1,9 +1,8 @@
-fn get_nth_arg(n: usize) -> String{
-     match std::env::args().nth(n) {
+fn get_nth_arg(n: usize) -> String {
+    match std::env::args().nth(n) {
         Some(d) => d,
-        None => panic!("Couldn't get argument {}", n)
-     }
-
+        None => panic!("Couldn't get argument {}", n),
+    }
 }
 
 #[derive(Debug)]
@@ -15,7 +14,6 @@ impl Args {
     pub fn new() -> Self {
         Args {
             path: get_nth_arg(1),
-        }    
+        }
     }
 }
-

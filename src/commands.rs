@@ -10,14 +10,12 @@ final prompt: mkdir ImgSqc138fbf84uw4du844edf && ffmpeg -i input.mp4 -vf "scale=
 
 */
 use std::process::Command;
-use terminal_size::{Width, Height, terminal_size};
+use terminal_size::{terminal_size, Height, Width};
 
-
-
-pub fn prepare_vid(path: &String){
+pub fn prepare_vid(path: &String) {
     //creates a folder to store the frames and converts the video into a 100 pix height and 6ps to img sequence"scale=-1:100,fps=6"
     let h = new_height(vid_dimensions(path));
-    let vf_arg = "scale=-1:".to_string() + &h.to_string() + ",fps=20";  //    let vf_arg = format!("scale=-1:{},fps=20", h);
+    let vf_arg = "scale=-1:".to_string() + &h.to_string() + ",fps=20"; //    let vf_arg = format!("scale=-1:{},fps=20", h);
 
     let _output = Command::new("rm")
         .arg("-f")
@@ -43,9 +41,9 @@ pub fn prepare_vid(path: &String){
         .expect("Failed to execute ffmpeg command");
 }
 
-pub fn vid_dimensions(path: &String)-> (u16,u16){
-    let mut width=0;
-    let mut height=0;
+pub fn vid_dimensions(path: &String) -> (u16, u16) {
+    let mut width = 0;
+    let mut height = 0;
 
     let output = Command::new("ffprobe")
         .arg("-i")
@@ -80,31 +78,30 @@ pub fn vid_dimensions(path: &String)-> (u16,u16){
             height = fields[1].parse::<u16>().unwrap();
         }
     }
-    (width,height)
+    (width, height)
 }
 
-pub fn new_height((w,h): (u16, u16)) -> u8{
+pub fn new_height((w, h): (u16, u16)) -> u8 {
     let size = terminal_size();
     if let Some((Width(wt), Height(ht))) = size {
-        if h<=ht && w <=wt{
+        if h <= ht && w <= wt {
             h as u8
-        }
-        else if h > ht {
-            let w = (w as f32 * (ht as f32/h as f32)) as u16;
-            if w <= wt{
+        } else if h > ht {
+            let w = (w as f32 * (ht as f32 / h as f32)) as u16;
+            if w <= wt {
                 ht as u8
             } else {
-                (ht as f32 * (wt as f32/w as f32)) as u8
+                (ht as f32 * (wt as f32 / w as f32)) as u8
             }
         } else {
-            (h as f32 * (wt as f32/w as f32)) as u8
+            (h as f32 * (wt as f32 / w as f32)) as u8
         }
     } else {
         80
     }
 }
 
-pub fn end_program(){
+pub fn end_program() {
     let _output = Command::new("rm")
         .arg("-f")
         .arg("-r")
